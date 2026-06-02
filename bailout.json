@@ -1,0 +1,15 @@
+
+{
+  "date": "2026-06-01",
+  "total_owed": "1.05T KES",
+  "source": "National Treasury - State Corporations Report 2025",
+  "corporations": [
+    {"name": "Kenya Airways", "owed": "122.9B KES", "status": "Defaulting", "ceo": "Allan Kilavuka", "risk": "Critical"},
+    {"name": "Kenya Power (KPLC)", "owed": "45B KES", "status": "Partially servicing", "ceo": "Joseph Siror", "risk": "High"},
+    {"name": "Kenya Railways", "owed": "38B KES", "status": "Defaulting", "ceo": "Philip Mainga", "risk": "High"},
+    {"name": "KETRACO", "owed": "12B KES", "status": "Current", "ceo": "John Mativo", "risk": "Medium"},
+    {"name": "National Hospital Insurance Fund", "owed": "9B KES", "status": "Under audit", "ceo": "Elijah Wachira", "risk": "High"},
+    {"name": "Kenya Ports Authority", "owed": "7B KES", "status": "Current", "ceo": "William Ruto (acting)", "risk": "Low"},
+    {"name": "Rural Electrification Authority", "owed": "15B KES", "status": "Defaulting", "ceo": "Peter Mbugua", "risk": "High"}
+  ]
+}

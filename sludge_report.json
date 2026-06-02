@@ -1,0 +1,22 @@
+﻿
+{
+  "date": "2026-06-01",
+  "total_stalled": "187.3B KES",
+  "source": "Controller of Budget Reports + Public Records",
+  "projects": [
+    {"name": "Galana-Kulalu Irrigation Scheme", "allocated": "22B KES", "status": "Stalled at 5% - Only 2,000 of 40,000 hectares done", "ministry": "Water", "county": "Kilifi", "lat": -3.124, "lng": 39.789},
+    {"name": "Kimwarer Dam", "allocated": "28B KES", "status": "Stalled - Under corruption investigation", "ministry": "Water", "county": "Elgeyo Marakwet", "lat": 0.789, "lng": 35.654},
+    {"name": "Arror Dam", "allocated": "20B KES", "status": "Stalled - Under corruption investigation", "ministry": "Water", "county": "Elgeyo Marakwet", "lat": 0.801, "lng": 35.632},
+    {"name": "Nairobi Commuter Rail", "allocated": "15B KES", "status": "Stalled at 2% - Only 3km of track laid", "ministry": "Transport", "county": "Nairobi", "lat": -1.286, "lng": 36.817},
+    {"name": "Mombasa Port Expansion Phase 2", "allocated": "40B KES", "status": "Stalled at 15% - Contractor abandoned site", "ministry": "Transport", "county": "Mombasa", "lat": -4.043, "lng": 39.668},
+    {"name": "KEMSA Medical Supplies System", "allocated": "3.7B KES", "status": "Fraud - Under audit", "ministry": "Health", "county": "Nairobi", "lat": -1.292, "lng": 36.821},
+    {"name": "Stalled Health Centers (47 counties)", "allocated": "8B KES", "status": "70% incomplete", "ministry": "Health", "county": "Nationwide", "lat": -1.292, "lng": 36.821},
+    {"name": "Nairobi Western Bypass", "allocated": "12.6B KES", "status": "Stalled at 40% - Land compensation issues", "ministry": "Transport", "county": "Nairobi", "lat": -1.299, "lng": 36.766},
+    {"name": "Lake Victoria Basin Water Project", "allocated": "6B KES", "status": "Stalled at 10%", "ministry": "Water", "county": "Kisumu", "lat": -0.092, "lng": 34.768},
+    {"name": "Isiolo Solar Power Plant", "allocated": "5B KES", "status": "Stalled at 0% - Funds diverted", "ministry": "Energy", "county": "Isiolo", "lat": 0.352, "lng": 37.582},
+    {"name": "Nakuru County Aggregation Park", "allocated": "2.5B KES", "status": "Stalled at 25%", "ministry": "Agriculture", "county": "Nakuru", "lat": -0.303, "lng": 36.080},
+    {"name": "Mwea Rice Irrigation Expansion", "allocated": "4.5B KES", "status": "Stalled at 30%", "ministry": "Water", "county": "Kirinyaga", "lat": -0.620, "lng": 37.340},
+    {"name": "Lamu Port Phase 2", "allocated": "20B KES", "status": "Stalled - No activity for 18 months", "ministry": "Transport", "county": "Lamu", "lat": -2.269, "lng": 40.902},
+    {"name": "Dongo Kundu Bypass", "allocated": "7.5B KES", "status": "Stalled at 60% - Payment disputes", "ministry": "Transport", "county": "Mombasa", "lat": -4.025, "lng": 39.645}
+  ]
+}
