@@ -43,6 +43,7 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 15px;
         }
         a {
             display: inline-block;
@@ -87,24 +88,24 @@
             <a href="dashboard.html">🏗️ Stalled Projects</a>
             <a href="bailout.html" class="secondary">💰 Bailout Watch</a>
         </div>
-        <div class="buttons" style="margin-top: 15px;">
+        <div class="buttons">
             <a href="report.html" style="background:#00aa44;">📱 Report Stalled Site</a>
         </div>
         <div class="footer">
             Tracking 187.3B KES in stalled projects<br>
             Exposing 1.05T KES in state corporation debt<br>
-            <span class="install-banner">📲 Tap Share → Add to Home Screen to install as app</span>
+            <div class="install-banner">📲 Tap Share → Add to Home Screen to install as app</div>
         </div>
     </div>
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("sw.js").then(function(reg) {
-                console.log("Service worker registered:", reg);
+                console.log("Service worker registered");
             }).catch(function(err) {
-                console.log("Service worker failed:", err);
+                console.log("Service worker failed");
             });
         }
     </script>
 </body>
 </html>
-'@ | Out-File -FilePath index.html -Encoding utf8
+'@ | Out-File -FilePath index.html -Encoding utf8 -Force
