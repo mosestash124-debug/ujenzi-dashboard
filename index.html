@@ -1,1 +1,96 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujenzi - Kenya Integrity OS</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ff0000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Ujenzi">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 4rem;
+            border-left: 5px solid #ff0000;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .tagline {
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        a {
+            display: inline-block;
+            background: #ff0000;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .secondary {
+            background: #00aa44;
+        }
+        .footer {
+            margin-top: 60px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        .install-banner {
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #00aa44;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇰🇪 UJENZI</h1>
+        <div class="tagline">Public Project Performance & Integrity OS</div>
+        <div class="buttons">
+            <a href="dashboard.html">🏗️ Stalled Projects</a>
+            <a href="bailout.html" class="secondary">💰 Bailout Watch</a>
+        </div>
+        <div class="buttons">
+            <a href="report.html" style="background:#00aa44;">📱 Report Stalled Site</a>
+        </div>
+        <div class="footer">
+            Tracking 187.3B KES in stalled projects<br>
+            Exposing 1.05T KES in state corporation debt
+            <div class="install-banner">📲 Tap Share → Add to Home Screen to install as app</div>
+        </div>
+    </div>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js");
+        }
+    </script>
+</body>
+</html>
