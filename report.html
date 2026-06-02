@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ujenzi - Report Stalled Project</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0a0a0a; color: #fff; padding: 16px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { font-size: 1.8rem; border-left: 4px solid #ff0000; padding-left: 16px; margin-bottom: 8px; }
+        .sub { color: #888; font-size: 0.9rem; margin-bottom: 24px; padding-left: 20px; }
+        .nav { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+        .nav a { color: #ff4444; text-decoration: none; font-size: 0.9rem; padding: 8px 0; }
+        .form-card { background: #111; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #ccc; }
+        input, textarea, select { width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 10px; font-size: 1rem; font-family: inherit; }
+        textarea { resize: vertical; min-height: 80px; }
+        button { background: #ff0000; color: white; border: none; padding: 14px; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; }
+        button:active { transform: scale(0.98); }
+        .location-btn { background: #00aa44; margin-top: 8px; }
+        .photo-preview { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .photo-preview img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 2px solid #ff0000; }
+        .success { background: #00aa44; padding: 12px; border-radius: 10px; margin-top: 16px; text-align: center; }
+        .error { background: #ff0000; padding: 12px; border-radius: 10px; margin-top: 16px; text-align: center; }
+        .info { background: #333; padding: 8px; border-radius: 8px; font-size: 0.8rem; margin-top: 8px; word-break: break-all; }
+        .footer { text-align: center; color: #555; font-size: 0.7rem; margin-top: 30px; padding-top: 16px; border-top: 1px solid #222; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇰🇪 UJENZI</h1>
+        <div class="sub">Report a Stalled Government Project</div>
+        <div class="nav">
+            <a href="dashboard.html">🏗️ Stalled Projects</a>
+            <a href="bailout.html">💰 Bailout Watch</a>
+            <a href="report.html" style="color:#00aa44;">📱 Report</a>
+        </div>
+        <div class="form-card">
+            <div class="form-group">
+                <label>📍 Project Name *</label>
+                <input type="text" id="projectName" placeholder="e.g., Kinango Health Centre">
+            </div>
+            <div class="form-group">
+                <label>📁 Ministry / Department</label>
+                <select id="ministry">
+                    <option value="Water">Water</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Health">Health</option>
+                    <option value="Energy">Energy</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Education">Education</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>📋 Status *</label>
+                <select id="status">
+                    <option value="Stalled">Completely Stalled</option>
+                    <option value="Incomplete">Partially Incomplete</option>
+                    <option value="Abandoned">Abandoned</option>
+                    <option value="No workers">No workers on site</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>💰 Estimated Budget Lost (optional)</label>
+                <input type="text" id="budget" placeholder="e.g., 50M KES">
+            </div>
+            <div class="form-group">
+                <label>📝 Description *</label>
+                <textarea id="description" placeholder="Describe the current state of the project..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>📍 GPS Location</label>
+                <button type="button" class="location-btn" onclick="getLocation()">📍 Get My Current Location</button>
+                <div id="locationInfo" class="info">No location captured yet</div>
+                <input type="hidden" id="latitude">
+                <input type="hidden" id="longitude">
+            </div>
+            <div class="form-group">
+                <label>📸 Photo Evidence</label>
+                <input type="file" id="photo" accept="image/*" capture="environment">
+                <div id="photoPreview" class="photo-preview"></div>
+            </div>
+            <button onclick="submitReport()">🚨 SUBMIT REPORT</button>
+            <div id="result"></div>
+        </div>
+        <div class="footer">Your report helps expose corruption and stalled projects.<br>All reports are public and can be verified via satellite.</div>
+    </div>
+    <script>
+        let currentPhoto = null;
+        document.getElementById('photo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    currentPhoto = event.target.result;
+                    document.getElementById('photoPreview').innerHTML = '<img src="' + currentPhoto + '" alt="Evidence photo">';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        function getLocation() {
+            if (navigator.geolocation) {
+                document.getElementById('locationInfo').innerHTML = '📍 Fetching location...';
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        document.getElementById('latitude').value = lat;
+                        document.getElementById('longitude').value = lng;
+                        document.getElementById('locationInfo').innerHTML = '📍 Location captured!<br>Latitude: ' + lat + '<br>Longitude: ' + lng;
+                    },
+                    function(error) {
+                        document.getElementById('locationInfo').innerHTML = '⚠️ Could not get location. Please enable GPS.';
+                    }
+                );
+            } else {
+                document.getElementById('locationInfo').innerHTML = '⚠️ GPS not supported on this browser.';
+            }
+        }
+        function submitReport() {
+            var name = document.getElementById('projectName').value;
+            var ministry = document.getElementById('ministry').value;
+            var status = document.getElementById('status').value;
+            var budget = document.getElementById('budget').value;
+            var description = document.getElementById('description').value;
+            var lat = document.getElementById('latitude').value;
+            var lng = document.getElementById('longitude').value;
+            if (!name) { showResult('Please enter a project name', 'error'); return; }
+            if (!description) { showResult('Please describe the project status', 'error'); return; }
+            var report = {
+                id: Date.now(),
+                name: name,
+                ministry: ministry,
+                status: status + ' - Citizen Report',
+                budget: budget || 'Unknown',
+                description: description,
+                lat: lat || null,
+                lng: lng || null,
+                photo: currentPhoto || null,
+                date: new Date().toISOString(),
+                reporter: 'Citizen'
+            };
+            var reports = JSON.parse(localStorage.getItem('ujenzi_reports') || '[]');
+            reports.push(report);
+            localStorage.setItem('ujenzi_reports', JSON.stringify(reports));
+            showResult('✅ Report submitted successfully! Your voice matters.', 'success');
+            setTimeout(function() {
+                document.getElementById('projectName').value = '';
+                document.getElementById('description').value = '';
+                document.getElementById('latitude').value = '';
+                document.getElementById('longitude').value = '';
+                document.getElementById('locationInfo').innerHTML = 'No location captured yet';
+                document.getElementById('photoPreview').innerHTML = '';
+                currentPhoto = null;
+                document.getElementById('photo').value = '';
+            }, 2000);
+        }
+        function showResult(msg, type) {
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="' + type + '">' + msg + '</div>';
+            setTimeout(function() { resultDiv.innerHTML = ''; }, 5000);
+        }
+    </script>
+</body>
+</html>
