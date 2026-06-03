@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Install Ujenzi - Kenya Integrity OS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: #111;
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+            border: 1px solid #ff000033;
+        }
+        h1 {
+            font-size: 2.5rem;
+            border-left: 4px solid #ff0000;
+            display: inline-block;
+            padding-left: 16px;
+            margin-bottom: 16px;
+        }
+        .sub {
+            color: #888;
+            margin-bottom: 32px;
+        }
+        .phone-detection {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .detected-os {
+            color: #00aa44;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .install-btn {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 16px 0;
+            transition: transform 0.2s;
+        }
+        .install-btn:active {
+            transform: scale(0.98);
+        }
+        .steps {
+            text-align: left;
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .steps h3 {
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+        .steps ol {
+            padding-left: 20px;
+        }
+        .steps li {
+            margin: 10px 0;
+            color: #ccc;
+        }
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+            display: none;
+        }
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .share-btn {
+            flex: 1;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .share-btn.whatsapp {
+            background: #25D366;
+        }
+        .share-btn.twitter {
+            background: #1DA1F2;
+        }
+        .footer {
+            margin-top: 24px;
+            color: #555;
+            font-size: 0.7rem;
+        }
+        .success-banner {
+            background: #00aa44;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 16px;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇰🇪 UJENZI</h1>
+        <div class="sub">Install the Integrity OS on your phone</div>
+
+        <div class="phone-detection">
+            <div class="detected-os" id="detectedOs">Detecting your device...</div>
+            <div id="installMessage"></div>
+        </div>
+
+        <button class="install-btn" id="mainInstallBtn" onclick="showInstallInstructions()">
+            📲 INSTALL UJENZI
+        </button>
+
+        <div id="stepsContainer" style="display: none;">
+            <div class="steps" id="androidSteps">
+                <h3>🤖 Android Installation</h3>
+                <ol>
+                    <li>Tap the <strong>three dots (⋮)</strong> in your browser</li>
+                    <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
+                    <li>Tap <strong>"Install"</strong></li>
+                    <li>Ujenzi will appear on your home screen!</li>
+                </ol>
+            </div>
+
+            <div class="steps" id="iosSteps" style="display: none;">
+                <h3>🍎 iPhone Installation</h3>
+                <ol>
+                    <li>Tap the <strong>Share button</strong> (square with arrow)</li>
+                    <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                    <li>Tap <strong>"Add"</strong> in the top right</li>
+                    <li>Ujenzi will appear on your home screen!</li>
+                </ol>
+            </div>
+
+            <div class="steps" id="otherSteps" style="display: none;">
+                <h3>📱 Installation</h3>
+                <ol>
+                    <li>Bookmark this page for easy access</li>
+                    <li>Or use the app from your browser directly</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="share-buttons">
+            <button class="share-btn whatsapp" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
+            <button class="share-btn twitter" onclick="shareTwitter()">🐦 Share on X</button>
+        </div>
+
+        <div id="successBanner" class="success-banner">
+            ✅ Installed successfully? Great! Start reporting stalled projects.
+        </div>
+
+        <div class="footer">
+            Once installed, Ujenzi works offline and opens like a real app.<br>
+            No personal data is collected. All reports are anonymous.
+        </div>
+    </div>
+
+    <script>
+        // Detect phone OS
+        function detectOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const detected = document.getElementById('detectedOs');
+            const androidSteps = document.getElementById('androidSteps');
+            const iosSteps = document.getElementById('iosSteps');
+            const otherSteps = document.getElementById('otherSteps');
+
+            if (/android/i.test(userAgent)) {
+                detected.innerHTML = '📱 Detected: Android Phone';
+                detected.style.color = '#00aa44';
+                androidSteps.style.display = 'block';
+                iosSteps.style.display = 'none';
+                otherSteps.style.display = 'none';
+                return 'android';
+            } 
+            else if (/iPad|iPhone|iPod/.test(userAgent)) {
+                detected.innerHTML = '🍎 Detected: iPhone';
+                detected.style.color = '#00aa44';
+                androidSteps.style.display = 'none';
+                iosSteps.style.display = 'block';
+                otherSteps.style.display = 'none';
+                return 'ios';
+            } 
+            else {
+                detected.innerHTML = '💻 Detected: Desktop (you can still use Ujenzi)';
+                detected.style.color = '#ffaa00';
+                androidSteps.style.display = 'none';
+                iosSteps.style.display = 'none';
+                otherSteps.style.display = 'block';
+                return 'other';
+            }
+        }
+
+        function showInstallInstructions() {
+            const stepsContainer = document.getElementById('stepsContainer');
+            const successBanner = document.getElementById('successBanner');
+            
+            if (stepsContainer.style.display === 'none') {
+                stepsContainer.style.display = 'block';
+                document.getElementById('mainInstallBtn').textContent = '✅ Follow steps above to install';
+            } else {
+                stepsContainer.style.display = 'none';
+                document.getElementById('mainInstallBtn').textContent = '📲 INSTALL UJENZI';
+            }
+            
+            // Show success banner after 30 seconds (assuming they installed)
+            setTimeout(() => {
+                successBanner.style.display = 'block';
+                setTimeout(() => {
+                    successBanner.style.display = 'none';
+                }, 8000);
+            }, 30000);
+        }
+
+        function shareWhatsApp() {
+            const url = encodeURIComponent('https://mosestash124-debug.github.io/ujenzi-dashboard/install.html');
+            const text = encodeURIComponent('🇰🇪 UJENZI - Report stalled government projects in Kenya. Install the app on your phone for free!');
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        }
+
+        function shareTwitter() {
+            const text = encodeURIComponent('🇰🇪 UJENZI - Hold the government accountable! Report stalled projects and track corruption. Install for free:');
+            const url = encodeURIComponent('https://mosestash124-debug.github.io/ujenzi-dashboard/install.html');
+            window.open(`https://twitter.com/intent/tweet?text=${text}%20${url}&hashtags=Ujenzi,Kenya,Accountability`, '_blank');
+        }
+
+        // Check if already installed as PWA
+        window.addEventListener('load', () => {
+            detectOS();
+            
+            // Check if running as standalone app
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                document.getElementById('successBanner').style.display = 'block';
+                document.getElementById('successBanner').innerHTML = '🎉 Ujenzi is already installed! Start reporting stalled projects.';
+                document.getElementById('mainInstallBtn').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
