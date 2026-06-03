@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,6 +52,24 @@
             font-size: 1.2rem;
             margin-bottom: 10px;
         }
+        .download-btn {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 18px 32px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 16px 0;
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .download-btn:active {
+            transform: scale(0.98);
+        }
         .install-btn {
             background: #ff0000;
             color: white;
@@ -86,17 +104,6 @@
             margin: 10px 0;
             color: #ccc;
         }
-        .qr-code {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px 0;
-            display: none;
-        }
-        .qr-code img {
-            width: 200px;
-            height: 200px;
-        }
         .share-buttons {
             display: flex;
             gap: 10px;
@@ -130,6 +137,14 @@
             margin-top: 16px;
             display: none;
         }
+        .apk-note {
+            background: #ff660033;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: #ffaa66;
+        }
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
@@ -142,7 +157,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🇰🇪 UJENZI</h1>
+        <h1>???? UJENZI</h1>
         <div class="sub">Install the Integrity OS on your phone</div>
 
         <div class="phone-detection">
@@ -150,15 +165,23 @@
             <div id="installMessage"></div>
         </div>
 
+        <!-- DIRECT APK DOWNLOAD BUTTON -->
+        <a href="https://drive.google.com/uc?export=download&id=124AHCbzJ4uMC3HpdRwpwtZim_ztpXs6L" class="download-btn" download>
+            ?? DOWNLOAD ANDROID APP (APK)
+        </a>
+        <div class="apk-note">
+            ? Direct download � installs like a normal app. No Play Store needed.
+        </div>
+
         <button class="install-btn" id="mainInstallBtn" onclick="showInstallInstructions()">
-            📲 INSTALL UJENZI
+            ?? Add to Home Screen (Alternative)
         </button>
 
         <div id="stepsContainer" style="display: none;">
             <div class="steps" id="androidSteps">
-                <h3>🤖 Android Installation</h3>
+                <h3>?? Android Installation</h3>
                 <ol>
-                    <li>Tap the <strong>three dots (⋮)</strong> in your browser</li>
+                    <li>Tap the <strong>three dots (?)</strong> in your browser</li>
                     <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
                     <li>Tap <strong>"Install"</strong></li>
                     <li>Ujenzi will appear on your home screen!</li>
@@ -166,7 +189,7 @@
             </div>
 
             <div class="steps" id="iosSteps" style="display: none;">
-                <h3>🍎 iPhone Installation</h3>
+                <h3>?? iPhone Installation</h3>
                 <ol>
                     <li>Tap the <strong>Share button</strong> (square with arrow)</li>
                     <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
@@ -176,7 +199,7 @@
             </div>
 
             <div class="steps" id="otherSteps" style="display: none;">
-                <h3>📱 Installation</h3>
+                <h3>?? Installation</h3>
                 <ol>
                     <li>Bookmark this page for easy access</li>
                     <li>Or use the app from your browser directly</li>
@@ -185,12 +208,12 @@
         </div>
 
         <div class="share-buttons">
-            <button class="share-btn whatsapp" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
-            <button class="share-btn twitter" onclick="shareTwitter()">🐦 Share on X</button>
+            <button class="share-btn whatsapp" onclick="shareWhatsApp()">?? Share on WhatsApp</button>
+            <button class="share-btn twitter" onclick="shareTwitter()">?? Share on X</button>
         </div>
 
         <div id="successBanner" class="success-banner">
-            ✅ Installed successfully? Great! Start reporting stalled projects.
+            ? Installed successfully? Great! Start reporting stalled projects.
         </div>
 
         <div class="footer">
@@ -200,7 +223,6 @@
     </div>
 
     <script>
-        // Detect phone OS
         function detectOS() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const detected = document.getElementById('detectedOs');
@@ -209,15 +231,15 @@
             const otherSteps = document.getElementById('otherSteps');
 
             if (/android/i.test(userAgent)) {
-                detected.innerHTML = '📱 Detected: Android Phone';
-                detected.style.color = '#00aa44';
+                detected.innerHTML = '?? Detected: Android Phone � Use the ORANGE button above to download the app!';
+                detected.style.color = '#ff6600';
                 androidSteps.style.display = 'block';
                 iosSteps.style.display = 'none';
                 otherSteps.style.display = 'none';
                 return 'android';
             } 
             else if (/iPad|iPhone|iPod/.test(userAgent)) {
-                detected.innerHTML = '🍎 Detected: iPhone';
+                detected.innerHTML = '?? Detected: iPhone';
                 detected.style.color = '#00aa44';
                 androidSteps.style.display = 'none';
                 iosSteps.style.display = 'block';
@@ -225,7 +247,7 @@
                 return 'ios';
             } 
             else {
-                detected.innerHTML = '💻 Detected: Desktop (you can still use Ujenzi)';
+                detected.innerHTML = '?? Detected: Desktop (you can still use Ujenzi)';
                 detected.style.color = '#ffaa00';
                 androidSteps.style.display = 'none';
                 iosSteps.style.display = 'none';
@@ -240,13 +262,12 @@
             
             if (stepsContainer.style.display === 'none') {
                 stepsContainer.style.display = 'block';
-                document.getElementById('mainInstallBtn').textContent = '✅ Follow steps above to install';
+                document.getElementById('mainInstallBtn').textContent = '? Follow steps above';
             } else {
                 stepsContainer.style.display = 'none';
-                document.getElementById('mainInstallBtn').textContent = '📲 INSTALL UJENZI';
+                document.getElementById('mainInstallBtn').textContent = '?? Add to Home Screen (Alternative)';
             }
             
-            // Show success banner after 30 seconds (assuming they installed)
             setTimeout(() => {
                 successBanner.style.display = 'block';
                 setTimeout(() => {
@@ -257,24 +278,22 @@
 
         function shareWhatsApp() {
             const url = encodeURIComponent('https://mosestash124-debug.github.io/ujenzi-dashboard/install.html');
-            const text = encodeURIComponent('🇰🇪 UJENZI - Report stalled government projects in Kenya. Install the app on your phone for free!');
+            const text = encodeURIComponent('???? UJENZI - Download the app to report stalled government projects in Kenya! Free. Anonymous. Powerful.');
             window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
         }
 
         function shareTwitter() {
-            const text = encodeURIComponent('🇰🇪 UJENZI - Hold the government accountable! Report stalled projects and track corruption. Install for free:');
+            const text = encodeURIComponent('???? UJENZI - Hold the government accountable! Download the app to report stalled projects:');
             const url = encodeURIComponent('https://mosestash124-debug.github.io/ujenzi-dashboard/install.html');
             window.open(`https://twitter.com/intent/tweet?text=${text}%20${url}&hashtags=Ujenzi,Kenya,Accountability`, '_blank');
         }
 
-        // Check if already installed as PWA
         window.addEventListener('load', () => {
             detectOS();
             
-            // Check if running as standalone app
             if (window.matchMedia('(display-mode: standalone)').matches) {
                 document.getElementById('successBanner').style.display = 'block';
-                document.getElementById('successBanner').innerHTML = '🎉 Ujenzi is already installed! Start reporting stalled projects.';
+                document.getElementById('successBanner').innerHTML = '?? Ujenzi is already installed! Start reporting stalled projects.';
                 document.getElementById('mainInstallBtn').style.display = 'none';
             }
         });
