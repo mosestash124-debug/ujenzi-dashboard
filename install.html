@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Install Ujenzi - Kenya Integrity OS</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: #0a0a0a;
@@ -63,9 +59,9 @@
             cursor: pointer;
             width: 100%;
             margin: 16px 0;
-            transition: transform 0.2s;
             text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
         .download-btn:active {
             transform: scale(0.98);
@@ -81,10 +77,6 @@
             cursor: pointer;
             width: 100%;
             margin: 16px 0;
-            transition: transform 0.2s;
-        }
-        .install-btn:active {
-            transform: scale(0.98);
         }
         .steps {
             text-align: left;
@@ -130,13 +122,6 @@
             color: #555;
             font-size: 0.7rem;
         }
-        .success-banner {
-            background: #00aa44;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 16px;
-            display: none;
-        }
         .apk-note {
             background: #ff660033;
             padding: 10px;
@@ -145,75 +130,53 @@
             font-size: 0.7rem;
             color: #ffaa66;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>???? UJENZI</h1>
+        <h1>🇰🇪 UJENZI</h1>
         <div class="sub">Install the Integrity OS on your phone</div>
 
         <div class="phone-detection">
             <div class="detected-os" id="detectedOs">Detecting your device...</div>
-            <div id="installMessage"></div>
         </div>
 
-        <!-- DIRECT APK DOWNLOAD BUTTON -->
-        <a href="https://drive.google.com/uc?export=download&confirm=t&id=124AHCbzJ4uMC3HpdRwpwtZim_ztpXs6L" class="download-btn" download>
-            ?? DOWNLOAD ANDROID APP (APK)
+        <!-- ORANGE DOWNLOAD BUTTON (REAL APK) -->
+        <a href="https://drive.google.com/uc?export=download&confirm=t&id=124AHCbzJ4uMC3HpdRwpwtZim_ztpXs6L" class="download-btn">
+            📲 DOWNLOAD ANDROID APP (APK)
         </a>
         <div class="apk-note">
-            ? Direct download � installs like a normal app. No Play Store needed.
+            ⚡ Direct download — installs like a normal app. No Play Store needed.
         </div>
 
         <button class="install-btn" id="mainInstallBtn" onclick="showInstallInstructions()">
-            ?? Add to Home Screen (Alternative)
+            📱 Add to Home Screen (Alternative)
         </button>
 
         <div id="stepsContainer" style="display: none;">
             <div class="steps" id="androidSteps">
-                <h3>?? Android Installation</h3>
+                <h3>🤖 Android Installation</h3>
                 <ol>
-                    <li>Tap the <strong>three dots (?)</strong> in your browser</li>
+                    <li>Tap the <strong>three dots (⋮)</strong> in your browser</li>
                     <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong></li>
                     <li>Tap <strong>"Install"</strong></li>
                     <li>Ujenzi will appear on your home screen!</li>
                 </ol>
             </div>
-
             <div class="steps" id="iosSteps" style="display: none;">
-                <h3>?? iPhone Installation</h3>
+                <h3>🍎 iPhone Installation</h3>
                 <ol>
                     <li>Tap the <strong>Share button</strong> (square with arrow)</li>
                     <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
-                    <li>Tap <strong>"Add"</strong> in the top right</li>
+                    <li>Tap <strong>"Add"</strong></li>
                     <li>Ujenzi will appear on your home screen!</li>
-                </ol>
-            </div>
-
-            <div class="steps" id="otherSteps" style="display: none;">
-                <h3>?? Installation</h3>
-                <ol>
-                    <li>Bookmark this page for easy access</li>
-                    <li>Or use the app from your browser directly</li>
                 </ol>
             </div>
         </div>
 
         <div class="share-buttons">
-            <button class="share-btn whatsapp" onclick="shareWhatsApp()">?? Share on WhatsApp</button>
-            <button class="share-btn twitter" onclick="shareTwitter()">?? Share on X</button>
-        </div>
-
-        <div id="successBanner" class="success-banner">
-            ? Installed successfully? Great! Start reporting stalled projects.
+            <button class="share-btn whatsapp" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
+            <button class="share-btn twitter" onclick="shareTwitter()">🐦 Share on X</button>
         </div>
 
         <div class="footer">
@@ -224,79 +187,47 @@
 
     <script>
         function detectOS() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const ua = navigator.userAgent;
             const detected = document.getElementById('detectedOs');
             const androidSteps = document.getElementById('androidSteps');
             const iosSteps = document.getElementById('iosSteps');
-            const otherSteps = document.getElementById('otherSteps');
 
-            if (/android/i.test(userAgent)) {
-                detected.innerHTML = '?? Detected: Android Phone � Use the ORANGE button above to download the app!';
+            if (/android/i.test(ua)) {
+                detected.innerHTML = '📱 Detected: Android Phone — Tap the ORANGE button above to download the app!';
                 detected.style.color = '#ff6600';
                 androidSteps.style.display = 'block';
                 iosSteps.style.display = 'none';
-                otherSteps.style.display = 'none';
-                return 'android';
-            } 
-            else if (/iPad|iPhone|iPod/.test(userAgent)) {
-                detected.innerHTML = '?? Detected: iPhone';
+            } else if (/iPad|iPhone|iPod/.test(ua)) {
+                detected.innerHTML = '🍎 Detected: iPhone';
                 detected.style.color = '#00aa44';
                 androidSteps.style.display = 'none';
                 iosSteps.style.display = 'block';
-                otherSteps.style.display = 'none';
-                return 'ios';
-            } 
-            else {
-                detected.innerHTML = '?? Detected: Desktop (you can still use Ujenzi)';
+            } else {
+                detected.innerHTML = '💻 Detected: Desktop (you can still use Ujenzi)';
                 detected.style.color = '#ffaa00';
-                androidSteps.style.display = 'none';
-                iosSteps.style.display = 'none';
-                otherSteps.style.display = 'block';
-                return 'other';
+                androidSteps.style.display = 'block';
+                iosSteps.style.display = 'block';
             }
         }
 
         function showInstallInstructions() {
-            const stepsContainer = document.getElementById('stepsContainer');
-            const successBanner = document.getElementById('successBanner');
-            
-            if (stepsContainer.style.display === 'none') {
-                stepsContainer.style.display = 'block';
-                document.getElementById('mainInstallBtn').textContent = '? Follow steps above';
-            } else {
-                stepsContainer.style.display = 'none';
-                document.getElementById('mainInstallBtn').textContent = '?? Add to Home Screen (Alternative)';
-            }
-            
-            setTimeout(() => {
-                successBanner.style.display = 'block';
-                setTimeout(() => {
-                    successBanner.style.display = 'none';
-                }, 8000);
-            }, 30000);
+            const steps = document.getElementById('stepsContainer');
+            steps.style.display = steps.style.display === 'none' ? 'block' : 'none';
         }
 
         function shareWhatsApp() {
             const url = encodeURIComponent('https://mosestash124-debug.github.io/ujenzi-dashboard/install.html');
-            const text = encodeURIComponent('???? UJENZI - Download the app to report stalled government projects in Kenya! Free. Anonymous. Powerful.');
+            const text = encodeURIComponent('🇰🇪 UJENZI - Download the app to report stalled government projects in Kenya! Free. Anonymous.');
             window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
         }
 
         function shareTwitter() {
-            const text = encodeURIComponent('???? UJENZI - Hold the government accountable! Download the app to report stalled projects:');
+            const text = encodeURIComponent('🇰🇪 UJENZI - Hold the government accountable! Download the app to report stalled projects:');
             const url = encodeURIComponent('https://mosestash124-debug.github.io/ujenzi-dashboard/install.html');
-            window.open(`https://twitter.com/intent/tweet?text=${text}%20${url}&hashtags=Ujenzi,Kenya,Accountability`, '_blank');
+            window.open(`https://twitter.com/intent/tweet?text=${text}%20${url}`, '_blank');
         }
 
-        window.addEventListener('load', () => {
-            detectOS();
-            
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                document.getElementById('successBanner').style.display = 'block';
-                document.getElementById('successBanner').innerHTML = '?? Ujenzi is already installed! Start reporting stalled projects.';
-                document.getElementById('mainInstallBtn').style.display = 'none';
-            }
-        });
+        detectOS();
     </script>
 </body>
 </html>
