@@ -9,6 +9,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Ujenzi">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background: #0a0a0a;
             color: white;
@@ -62,14 +67,6 @@
             color: #555;
             font-size: 0.8rem;
         }
-        .install-banner {
-            background: #1a1a1a;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #00aa44;
-        }
     </style>
 </head>
 <body>
@@ -81,21 +78,15 @@
             <a href="bailout.html" class="secondary">💰 Bailout Watch</a>
         </div>
         <div class="buttons">
-            <a href="report.html" style="background:#00aa44;">📱 Report Stalled Site</a>
+            <a href="report.html" class="secondary">📱 Report Stalled Site</a>
         </div>
         <div class="buttons">
-            <a href="install.html" class="install-link">📲 INSTALL APP (One Tap)</a>
+            <a href="install.html" class="install-link">📲 INSTALL APP</a>
         </div>
         <div class="footer">
             Tracking 187.3B KES in stalled projects<br>
             Exposing 1.05T KES in state corporation debt
-            <div class="install-banner">📲 Tap Share → Add to Home Screen to install as app</div>
         </div>
     </div>
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("sw.js");
-        }
-    </script>
 </body>
 </html>
