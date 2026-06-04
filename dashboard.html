@@ -1,10 +1,9 @@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ujenzi - Stalled Projects with Satellite Verify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ujenzi - Stalled Projects</title>
     <style>
         * {
             margin: 0;
@@ -15,115 +14,139 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0a0a;
             color: #fff;
-            padding: 20px;
+            padding: 16px;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             border-left: 5px solid #ff0000;
             padding-left: 20px;
             margin-bottom: 10px;
         }
         .nav {
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding-left: 25px;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-left: 20px;
+            flex-wrap: wrap;
         }
         .nav a {
             color: #ff4444;
             text-decoration: none;
             font-weight: bold;
         }
-        .nav a:hover {
-            text-decoration: underline;
-        }
         .total-card {
             background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
             border: 1px solid #ff000033;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
             text-align: center;
         }
         .total-label {
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #ff4444;
         }
         .total-amount {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         .add-btn {
             background: #00aa44;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            border-radius: 40px;
             font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
             margin-bottom: 20px;
-            font-weight: bold;
+            width: 100%;
+            max-width: 260px;
         }
         .project-grid {
-            display: grid;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
         .project-card {
             background: #111;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 16px;
             border-left: 4px solid #ff0000;
-            position: relative;
         }
         .project-name {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            word-break: break-word;
         }
         .project-details {
             display: flex;
-            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            gap: 8px;
+            margin: 8px 0;
         }
         .detail {
             background: #1a1a1a;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #ccc;
         }
         .status {
             color: #ff6666;
             font-weight: bold;
         }
-        .edit-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        .button-group {
             display: flex;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
         }
-        .edit-btn, .delete-btn, .share-btn, .satellite-btn {
+        .button-group button {
             background: #333;
             border: none;
             color: white;
-            padding: 5px 12px;
-            border-radius: 5px;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-weight: 500;
         }
-        .edit-btn:hover { background: #ffaa00; }
-        .delete-btn:hover { background: #ff0000; }
-        .share-btn:hover { background: #1DA1F2; }
-        .satellite-btn:hover { background: #00aa44; }
+        .satellite-btn { background: #00aa44; }
+        .share-btn { background: #1DA1F2; }
+        .edit-btn { background: #ffaa00; color: #111; }
+        .delete-btn { background: #ff0000; }
+        .coordinates {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid #222;
+        }
+        .footer {
+            margin-top: 32px;
+            text-align: center;
+            color: #555;
+            font-size: 0.7rem;
+            border-top: 1px solid #222;
+            padding-top: 16px;
+        }
+        @media (min-width: 768px) {
+            .button-group {
+                justify-content: flex-start;
+            }
+            .project-card {
+                padding: 20px;
+            }
+        }
         .modal {
             display: none;
             position: fixed;
@@ -139,313 +162,267 @@
         .modal-content {
             background: #1a1a1a;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 16px;
             width: 90%;
-            max-width: 800px;
+            max-width: 500px;
             max-height: 90%;
             overflow: auto;
         }
         .modal-content iframe {
             width: 100%;
-            height: 500px;
+            height: 400px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
         }
-        .modal-content input {
+        .modal-content input, .modal-content select {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 8px 0;
             background: #333;
             border: 1px solid #555;
             color: white;
-            border-radius: 5px;
+            border-radius: 8px;
         }
         .modal-content button {
             background: #ff0000;
             color: white;
             border: none;
             padding: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
+            margin-top: 8px;
+            border-radius: 8px;
             width: 100%;
+            cursor: pointer;
         }
         .close-btn {
             background: #333 !important;
-            margin-top: 5px !important;
-        }
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #555;
-            font-size: 0.8rem;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-        }
-        .coordinates {
-            font-size: 0.7rem;
-            color: #888;
-            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🇰🇪 UJENZI</h1>
-        <div class="nav">
-            <a href="dashboard.html">🏗️ Stalled Projects</a>
-            <a href="bailout.html">💰 Bailout Watch</a>
-        </div>
-        <div class="sub">Public Project Performance & Integrity OS — Verify with satellite imagery</div>
-
-        <div class="total-card">
-            <div class="total-label">💰 TOTAL STALLED PROJECT VALUE</div>
-            <div class="total-amount" id="totalAmount">Loading...</div>
-        </div>
-
-        <button class="add-btn" onclick="openAddModal()">+ Add New Project</button>
-
-        <div class="project-grid" id="projectsList">Loading...</div>
-
-        <div class="footer">
-            📅 Data: <span id="updateDate">---</span> | Source: Controller of Budget<br>
-            🛰️ Click Satellite to see real-time imagery of stalled sites
-        </div>
+<div class="container">
+    <h1>🇰🇪 UJENZI</h1>
+    <div class="nav">
+        <a href="dashboard.html">🏗️ Stalled</a>
+        <a href="bailout.html">💰 Bailout</a>
+        <a href="report.html">📱 Report</a>
+        <a href="reports_view.html">📋 Reports</a>
+        <a href="install.html">📲 Install</a>
     </div>
-
-    <div id="satelliteModal" class="modal">
-        <div class="modal-content">
-            <h3>🛰️ Satellite Verification</h3>
-            <p id="satelliteProjectName"></p>
-            <input type="text" id="latInput" placeholder="Latitude (e.g., -3.5)">
-            <input type="text" id="lngInput" placeholder="Longitude (e.g., 39.5)">
-            <button onclick="loadSatellite()">Load Satellite Image</button>
-            <div id="satelliteMap"></div>
-            <button class="close-btn" onclick="closeSatelliteModal()">Close</button>
-        </div>
+    <div class="total-card">
+        <div class="total-label">💰 TOTAL STALLED VALUE</div>
+        <div class="total-amount" id="totalAmount">Loading...</div>
     </div>
-
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <h3>Add/Edit Project</h3>
-            <input type="text" id="editName" placeholder="Project Name">
-            <input type="text" id="editAllocated" placeholder="Amount">
-            <input type="text" id="editStatus" placeholder="Status">
-            <input type="text" id="editMinistry" placeholder="Ministry">
-            <input type="text" id="editCounty" placeholder="County">
-            <input type="text" id="editLat" placeholder="Latitude (optional)">
-            <input type="text" id="EditLng" placeholder="Longitude (optional)">
-            <button onclick="saveEdit()">💾 Save</button>
-            <button onclick="closeModal()" style="background:#333;">Cancel</button>
-        </div>
+    <button class="add-btn" onclick="openAddModal()">+ Add New Project</button>
+    <div class="project-grid" id="projectsList">Loading...</div>
+    <div class="footer">
+        📅 Data: <span id="updateDate">---</span> | Source: Controller of Budget<br>
+        🛰️ Satellite – verify from space
     </div>
+</div>
 
-    <script>
-        let currentData = null;
-        let currentEditIndex = null;
-        let currentSatelliteProject = null;
+<!-- Satellite Modal -->
+<div id="satelliteModal" class="modal">
+    <div class="modal-content">
+        <h3>🛰️ Satellite Verification</h3>
+        <p id="satelliteProjectName"></p>
+        <input type="text" id="latInput" placeholder="Latitude">
+        <input type="text" id="lngInput" placeholder="Longitude">
+        <button onclick="loadSatellite()">Load Satellite Image</button>
+        <div id="satelliteMap"></div>
+        <button class="close-btn" onclick="closeSatelliteModal()">Close</button>
+    </div>
+</div>
 
-        // County coordinates (approximate centers)
-        const countyCoords = {
-            "Nairobi": [-1.286389, 36.817223],
-            "Mombasa": [-4.043477, 39.668206],
-            "Kisumu": [-0.091702, 34.767956],
-            "Kilifi": [-3.51065, 39.90933],
-            "Elgeyo Marakwet": [0.8, 35.6],
-            "Isiolo": [0.35, 37.58],
-            "Nakuru": [-0.3031, 36.0800],
-            "Kirinyaga": [-0.5, 37.3],
-            "Lamu": [-2.2686, 40.9021]
-        };
+<!-- Edit/Add Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h3>Add/Edit Project</h3>
+        <input type="text" id="editName" placeholder="Project Name">
+        <input type="text" id="editAllocated" placeholder="Amount (e.g., 22B KES)">
+        <input type="text" id="editStatus" placeholder="Status">
+        <input type="text" id="editMinistry" placeholder="Ministry">
+        <input type="text" id="editCounty" placeholder="County">
+        <input type="text" id="editLat" placeholder="Latitude">
+        <input type="text" id="editLng" placeholder="Longitude">
+        <button onclick="saveEdit()">💾 Save</button>
+        <button class="close-btn" onclick="closeModal()">Cancel</button>
+    </div>
+</div>
 
-        function loadData() {
-            fetch('sludge_report.json?' + new Date().getTime())
-                .then(res => res.json())
-                .then(data => {
-                    currentData = data;
-                    document.getElementById('totalAmount').innerText = data.total_stalled;
-                    document.getElementById('updateDate').innerText = data.date;
-                    
-                    const html = data.projects.map((p, i) => {
-                        const hasCoords = p.lat && p.lng;
-                        return `
-                        <div class="project-card">
-                            <div class="edit-buttons">
-                                <button class="satellite-btn" onclick="openSatelliteModal(${i})">🛰️ Satellite</button>
-                                <button class="share-btn" onclick="shareProject(${i})">🐦 Share</button>
-                                <button class="edit-btn" onclick="openEditModal(${i})">✏️ Edit</button>
-                                <button class="delete-btn" onclick="deleteProject(${i})">🗑️ Delete</button>
-                            </div>
-                            <div class="project-name">🚧 ${p.name}</div>
-                            <div class="project-details">
-                                <span class="detail">💰 ${p.allocated}</span>
-                                <span class="detail">📁 ${p.ministry}</span>
-                                <span class="detail">📍 ${p.county || 'Kenya'}</span>
-                                <span class="detail status">⚠️ ${p.status}</span>
-                            </div>
-                            ${hasCoords ? `<div class="coordinates">📍 Coordinates: ${p.lat}, ${p.lng}</div>` : '<div class="coordinates">⚠️ No coordinates set — click Satellite to add them</div>'}
-                        </div>
-                    `}).join('');
-                    document.getElementById('projectsList').innerHTML = html;
-                });
-        }
-
-        function openSatelliteModal(index) {
-            const p = currentData.projects[index];
-            currentSatelliteProject = index;
-            document.getElementById('satelliteProjectName').innerHTML = `<strong>${p.name}</strong><br>${p.county || 'Kenya'}`;
-            
-            // Pre-fill coordinates if they exist
-            if (p.lat && p.lng) {
-                document.getElementById('latInput').value = p.lat;
-                document.getElementById('lngInput').value = p.lng;
-                loadSatellite();
-            } else if (countyCoords[p.county]) {
-                document.getElementById('latInput').value = countyCoords[p.county][0];
-                document.getElementById('lngInput').value = countyCoords[p.county][1];
-                loadSatellite();
-            } else {
-                document.getElementById('latInput').value = '';
-                document.getElementById('lngInput').value = '';
-                document.getElementById('satelliteMap').innerHTML = '<p style="color:#ffaa00;">⚠️ Enter coordinates for this project to see satellite view</p>';
-            }
-            
-            document.getElementById('satelliteModal').style.display = 'flex';
-        }
-
-        function loadSatellite() {
-            const lat = document.getElementById('latInput').value;
-            const lng = document.getElementById('lngInput').value;
-            
-            if (!lat || !lng) {
-                document.getElementById('satelliteMap').innerHTML = '<p style="color:#ff0000;">❌ Please enter both latitude and longitude</p>';
-                return;
-            }
-            
-            // Save coordinates to project
-            if (currentSatelliteProject !== null && currentData) {
-                currentData.projects[currentSatelliteProject].lat = parseFloat(lat);
-                currentData.projects[currentSatelliteProject].lng = parseFloat(lng);
-                saveToFile();
-            }
-            
-            // Embed Google Maps satellite view
-            const mapHtml = `
-                <iframe 
-                    src="https://maps.google.com/maps?q=${lat},${lng}&z=18&output=embed&layer=satellite"
-                    allowfullscreen>
-                </iframe>
-                <p style="margin-top:10px; font-size:0.8rem; color:#88ff88;">
-                🛰️ <strong>What to look for:</strong><br>
-                - Compare with government's claimed progress<br>
-                - Look for construction activity vs. empty land<br>
-                - Check dates in bottom-right corner
-                </p>
-            `;
-            document.getElementById('satelliteMap').innerHTML = mapHtml;
-        }
-
-        function shareProject(i) {
-            const p = currentData.projects[i];
-            const tweet = `🚨 ${p.name} is STALLED at ${p.status}!\n💰 ${p.allocated} wasted.\n📍 ${p.county || 'Kenya'}\n\nVerify with satellite: https://maps.google.com/?q=${p.lat || '-1.286389'},${p.lng || '36.817223'}\n\n@WilliamsRuto @HonDuale @KE_Treasury\n#Ujenzi #KenyaStalledProjects`;
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`, '_blank');
-        }
-
-        function saveToFile() {
-            const blob = new Blob([JSON.stringify(currentData, null, 2)], {type: 'application/json'});
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'sludge_report.json';
-            link.click();
-        }
-
-        function openEditModal(i) {
-            currentEditIndex = i;
-            if (i >= 0) {
-                const p = currentData.projects[i];
-                document.getElementById('editName').value = p.name;
-                document.getElementById('editAllocated').value = p.allocated;
-                document.getElementById('editStatus').value = p.status;
-                document.getElementById('editMinistry').value = p.ministry;
-                document.getElementById('editCounty').value = p.county || '';
-                document.getElementById('editLat').value = p.lat || '';
-                document.getElementById('EditLng').value = p.lng || '';
-            } else {
-                ['editName','editAllocated','editStatus','editMinistry','editCounty','editLat','EditLng'].forEach(id => document.getElementById(id).value = '');
-            }
-            document.getElementById('editModal').style.display = 'flex';
-        }
-
-        function openAddModal() { openEditModal(-1); }
-
-        function saveEdit() {
-            const newProject = {
-                name: document.getElementById('editName').value,
-                allocated: document.getElementById('editAllocated').value,
-                status: document.getElementById('editStatus').value,
-                ministry: document.getElementById('editMinistry').value,
-                county: document.getElementById('editCounty').value || 'Kenya',
-                lat: parseFloat(document.getElementById('editLat').value) || null,
-                lng: parseFloat(document.getElementById('EditLng').value) || null
-            };
-            if (currentEditIndex === -1) currentData.projects.push(newProject);
-            else currentData.projects[currentEditIndex] = newProject;
-            saveToFile();
-            closeModal();
-            loadData();
-            alert('✅ Saved! Replace old sludge_report.json with downloaded file.');
-        }
-
-        function deleteProject(i) {
-            if (confirm('Delete this project?')) {
-                currentData.projects.splice(i, 1);
-                saveToFile();
-                loadData();
-            }
-        }
-
-        function closeModal() { document.getElementById('editModal').style.display = 'none'; }
-        function closeSatelliteModal() { document.getElementById('satelliteModal').style.display = 'none'; }
-
-        loadData();
-    </script>
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function(reg) {
-    reg.update();
-    reg.addEventListener('updatefound', function() {
-      var newWorker = reg.installing;
-      newWorker.addEventListener('statechange', function() {
-        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
-            window.location.reload();
-          }
+    let currentData = null;
+    let currentEditIndex = null;
+    let currentSatelliteProject = null;
+
+    const countyCoords = {
+        "Nairobi": [-1.286389, 36.817223],
+        "Mombasa": [-4.043477, 39.668206],
+        "Kisumu": [-0.091702, 34.767956],
+        "Kilifi": [-3.51065, 39.90933],
+        "Elgeyo Marakwet": [0.8, 35.6],
+        "Isiolo": [0.35, 37.58],
+        "Nakuru": [-0.3031, 36.0800],
+        "Kirinyaga": [-0.5, 37.3],
+        "Lamu": [-2.2686, 40.9021]
+    };
+
+    function loadData() {
+        fetch('sludge_report.json?' + Date.now())
+            .then(res => res.json())
+            .then(data => {
+                currentData = data;
+                document.getElementById('totalAmount').innerText = data.total_stalled;
+                document.getElementById('updateDate').innerText = data.date;
+                const html = data.projects.map((p, i) => `
+                    <div class="project-card">
+                        <div class="project-name">🚧 ${escapeHtml(p.name)}</div>
+                        <div class="project-details">
+                            <span class="detail">💰 ${escapeHtml(p.allocated)}</span>
+                            <span class="detail">📁 ${escapeHtml(p.ministry)}</span>
+                            <span class="detail">📍 ${escapeHtml(p.county || 'Kenya')}</span>
+                            <span class="detail status">⚠️ ${escapeHtml(p.status)}</span>
+                        </div>
+                        <div class="button-group">
+                            <button class="satellite-btn" onclick="openSatelliteModal(${i})">🛰️ Satellite</button>
+                            <button class="share-btn" onclick="shareProject(${i})">🐦 Share</button>
+                            <button class="edit-btn" onclick="openEditModal(${i})">✏️ Edit</button>
+                            <button class="delete-btn" onclick="deleteProject(${i})">🗑️ Delete</button>
+                        </div>
+                        ${p.lat && p.lng ? `<div class="coordinates">📡 ${p.lat}, ${p.lng}</div>` : '<div class="coordinates">⚠️ No coordinates — edit to add</div>'}
+                    </div>
+                `).join('');
+                document.getElementById('projectsList').innerHTML = html;
+            })
+            .catch(e => {
+                document.getElementById('projectsList').innerHTML = '<p style="color:red;">Error loading data. Check sludge_report.json</p>';
+            });
+    }
+
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+
+    function openSatelliteModal(idx) {
+        const p = currentData.projects[idx];
+        currentSatelliteProject = idx;
+        document.getElementById('satelliteProjectName').innerHTML = `<strong>${p.name}</strong><br>${p.county || 'Kenya'}`;
+        if (p.lat && p.lng) {
+            document.getElementById('latInput').value = p.lat;
+            document.getElementById('lngInput').value = p.lng;
+            loadSatellite();
+        } else if (countyCoords[p.county]) {
+            document.getElementById('latInput').value = countyCoords[p.county][0];
+            document.getElementById('lngInput').value = countyCoords[p.county][1];
+            loadSatellite();
+        } else {
+            document.getElementById('latInput').value = '';
+            document.getElementById('lngInput').value = '';
+            document.getElementById('satelliteMap').innerHTML = '<p style="color:#ffaa00;">⚠️ Enter coordinates for this project</p>';
         }
-      });
-    });
-  });
-}
-</script><script>
-// Check for service worker updates every time user opens the app
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function(reg) {
-    // Check for updates every time the page loads
-    reg.update();
-    
-    // Optional: notify user when an update is ready
-    reg.addEventListener('updatefound', function() {
-      var newWorker = reg.installing;
-      newWorker.addEventListener('statechange', function() {
-        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          // New version available, refresh to apply
-          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
-            window.location.reload();
-          }
+        document.getElementById('satelliteModal').style.display = 'flex';
+    }
+
+    function loadSatellite() {
+        let lat = document.getElementById('latInput').value;
+        let lng = document.getElementById('lngInput').value;
+        if (!lat || !lng) {
+            document.getElementById('satelliteMap').innerHTML = '<p style="color:red;">❌ Enter latitude and longitude</p>';
+            return;
         }
-      });
-    });
-  });
-}
+        if (currentSatelliteProject !== null && currentData) {
+            currentData.projects[currentSatelliteProject].lat = parseFloat(lat);
+            currentData.projects[currentSatelliteProject].lng = parseFloat(lng);
+            saveToFile();
+        }
+        document.getElementById('satelliteMap').innerHTML = `<iframe src="https://maps.google.com/maps?q=${lat},${lng}&z=18&output=embed&layer=satellite" allowfullscreen></iframe><p style="margin-top:10px; font-size:0.8rem;">🛰️ Compare with government claims</p>`;
+    }
+
+    function shareProject(i) {
+        const p = currentData.projects[i];
+        let tweet = `🚨 ${p.name} is STALLED!\n💰 ${p.allocated} wasted.\n📍 ${p.county || 'Kenya'}\n`;
+        if (p.lat && p.lng) tweet += `🛰️ Verify: https://maps.google.com/?q=${p.lat},${p.lng}\n`;
+        tweet += `\n@WilliamsRuto @HonDuale @KE_Treasury\n#Ujenzi #KenyaStalledProjects`;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`, '_blank');
+    }
+
+    function saveToFile() {
+        const blob = new Blob([JSON.stringify(currentData, null, 2)], {type: 'application/json'});
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'sludge_report.json';
+        link.click();
+    }
+
+    function openEditModal(i) {
+        currentEditIndex = i;
+        if (i >= 0) {
+            const p = currentData.projects[i];
+            document.getElementById('editName').value = p.name || '';
+            document.getElementById('editAllocated').value = p.allocated || '';
+            document.getElementById('editStatus').value = p.status || '';
+            document.getElementById('editMinistry').value = p.ministry || '';
+            document.getElementById('editCounty').value = p.county || '';
+            document.getElementById('editLat').value = p.lat || '';
+            document.getElementById('editLng').value = p.lng || '';
+        } else {
+            ['editName','editAllocated','editStatus','editMinistry','editCounty','editLat','editLng'].forEach(id => document.getElementById(id).value = '');
+        }
+        document.getElementById('editModal').style.display = 'flex';
+    }
+
+    function openAddModal() { openEditModal(-1); }
+
+    function saveEdit() {
+        const newProject = {
+            name: document.getElementById('editName').value,
+            allocated: document.getElementById('editAllocated').value,
+            status: document.getElementById('editStatus').value,
+            ministry: document.getElementById('editMinistry').value,
+            county: document.getElementById('editCounty').value || 'Kenya',
+            lat: parseFloat(document.getElementById('editLat').value) || null,
+            lng: parseFloat(document.getElementById('editLng').value) || null
+        };
+        if (currentEditIndex === -1) currentData.projects.push(newProject);
+        else currentData.projects[currentEditIndex] = newProject;
+        let total = 0;
+        currentData.projects.forEach(p => {
+            let m = p.allocated.match(/(\d+(?:\.\d+)?)/);
+            if (m) total += parseFloat(m[0]);
+        });
+        currentData.total_stalled = total + 'B KES';
+        currentData.date = new Date().toISOString().split('T')[0];
+        saveToFile();
+        closeModal();
+        loadData();
+        alert('✅ Saved! Replace old sludge_report.json with the downloaded file.');
+    }
+
+    function deleteProject(i) {
+        if (confirm('Delete this project?')) {
+            currentData.projects.splice(i, 1);
+            saveToFile();
+            loadData();
+        }
+    }
+    function closeModal() { document.getElementById('editModal').style.display = 'none'; }
+    function closeSatelliteModal() { document.getElementById('satelliteModal').style.display = 'none'; }
+
+    loadData();
+
+    // Auto‑update service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            reg.update();
+            reg.addEventListener('updatefound', () => {
+                const newWorker = reg.installing;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+                            window.location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    }
 </script>
 </body>
 </html>
