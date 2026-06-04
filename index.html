@@ -71,22 +71,60 @@
 </head>
 <body>
     <div class="container">
-        <h1>🇰🇪 UJENZI</h1>
+        <h1>???? UJENZI</h1>
         <div class="tagline">Public Project Performance & Integrity OS</div>
         <div class="buttons">
-            <a href="dashboard.html">🏗️ Stalled Projects</a>
-            <a href="bailout.html" class="secondary">💰 Bailout Watch</a>
+            <a href="dashboard.html">??? Stalled Projects</a>
+            <a href="bailout.html" class="secondary">?? Bailout Watch</a>
         </div>
         <div class="buttons">
-            <a href="report.html" class="secondary">📱 Report Stalled Site</a>
+            <a href="report.html" class="secondary">?? Report Stalled Site</a>
         </div>
         <div class="buttons">
-            <a href="install.html" class="install-link">📲 INSTALL APP</a>
+            <a href="install.html" class="install-link">?? INSTALL APP</a>
         </div>
         <div class="footer">
             Tracking 187.3B KES in stalled projects<br>
             Exposing 1.05T KES in state corporation debt
         </div>
     </div>
-</body>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    reg.update();
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script>
+</body><script>
+// Check for service worker updates every time user opens the app
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    // Check for updates every time the page loads
+    reg.update();
+    
+    // Optional: notify user when an update is ready
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          // New version available, refresh to apply
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script>
 </html>

@@ -409,5 +409,43 @@
 
         loadData();
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    reg.update();
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script><script>
+// Check for service worker updates every time user opens the app
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    // Check for updates every time the page loads
+    reg.update();
+    
+    // Optional: notify user when an update is ready
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          // New version available, refresh to apply
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script>
 </body>
 </html>

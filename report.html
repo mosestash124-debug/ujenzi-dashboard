@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,20 +30,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>🇰🇪 UJENZI</h1>
+        <h1>???? UJENZI</h1>
         <div class="sub">Report a Stalled Government Project</div>
         <div class="nav">
-            <a href="dashboard.html">🏗️ Stalled Projects</a>
-            <a href="bailout.html">💰 Bailout Watch</a>
-            <a href="report.html" style="color:#00aa44;">📱 Report</a>
+            <a href="dashboard.html">??? Stalled Projects</a>
+            <a href="bailout.html">?? Bailout Watch</a>
+            <a href="report.html" style="color:#00aa44;">?? Report</a>
         </div>
         <div class="form-card">
             <div class="form-group">
-                <label>📍 Project Name *</label>
+                <label>?? Project Name *</label>
                 <input type="text" id="projectName" placeholder="e.g., Kinango Health Centre">
             </div>
             <div class="form-group">
-                <label>📁 Ministry / Department</label>
+                <label>?? Ministry / Department</label>
                 <select id="ministry">
                     <option value="Water">Water</option>
                     <option value="Transport">Transport</option>
@@ -55,7 +55,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>📋 Status *</label>
+                <label>?? Status *</label>
                 <select id="status">
                     <option value="Stalled">Completely Stalled</option>
                     <option value="Incomplete">Partially Incomplete</option>
@@ -64,26 +64,26 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>💰 Estimated Budget Lost (optional)</label>
+                <label>?? Estimated Budget Lost (optional)</label>
                 <input type="text" id="budget" placeholder="e.g., 50M KES">
             </div>
             <div class="form-group">
-                <label>📝 Description *</label>
+                <label>?? Description *</label>
                 <textarea id="description" placeholder="Describe the current state of the project..."></textarea>
             </div>
             <div class="form-group">
-                <label>📍 GPS Location</label>
-                <button type="button" class="location-btn" onclick="getLocation()">📍 Get My Current Location</button>
+                <label>?? GPS Location</label>
+                <button type="button" class="location-btn" onclick="getLocation()">?? Get My Current Location</button>
                 <div id="locationInfo" class="info">No location captured yet</div>
                 <input type="hidden" id="latitude">
                 <input type="hidden" id="longitude">
             </div>
             <div class="form-group">
-                <label>📸 Photo Evidence</label>
+                <label>?? Photo Evidence</label>
                 <input type="file" id="photo" accept="image/*" capture="environment">
                 <div id="photoPreview" class="photo-preview"></div>
             </div>
-            <button onclick="submitReport()">🚨 SUBMIT REPORT</button>
+            <button onclick="submitReport()">?? SUBMIT REPORT</button>
             <div id="result"></div>
         </div>
         <div class="footer">Your report helps expose corruption and stalled projects.<br>All reports are public and can be verified via satellite.</div>
@@ -103,21 +103,21 @@
         });
         function getLocation() {
             if (navigator.geolocation) {
-                document.getElementById('locationInfo').innerHTML = '📍 Fetching location...';
+                document.getElementById('locationInfo').innerHTML = '?? Fetching location...';
                 navigator.geolocation.getCurrentPosition(
                     function(position) {
                         var lat = position.coords.latitude;
                         var lng = position.coords.longitude;
                         document.getElementById('latitude').value = lat;
                         document.getElementById('longitude').value = lng;
-                        document.getElementById('locationInfo').innerHTML = '📍 Location captured!<br>Latitude: ' + lat + '<br>Longitude: ' + lng;
+                        document.getElementById('locationInfo').innerHTML = '?? Location captured!<br>Latitude: ' + lat + '<br>Longitude: ' + lng;
                     },
                     function(error) {
-                        document.getElementById('locationInfo').innerHTML = '⚠️ Could not get location. Please enable GPS.';
+                        document.getElementById('locationInfo').innerHTML = '?? Could not get location. Please enable GPS.';
                     }
                 );
             } else {
-                document.getElementById('locationInfo').innerHTML = '⚠️ GPS not supported on this browser.';
+                document.getElementById('locationInfo').innerHTML = '?? GPS not supported on this browser.';
             }
         }
         function submitReport() {
@@ -146,7 +146,7 @@
             var reports = JSON.parse(localStorage.getItem('ujenzi_reports') || '[]');
             reports.push(report);
             localStorage.setItem('ujenzi_reports', JSON.stringify(reports));
-            showResult('✅ Report submitted successfully! Your voice matters.', 'success');
+            showResult('? Report submitted successfully! Your voice matters.', 'success');
             setTimeout(function() {
                 document.getElementById('projectName').value = '';
                 document.getElementById('description').value = '';
@@ -164,5 +164,43 @@
             setTimeout(function() { resultDiv.innerHTML = ''; }, 5000);
         }
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    reg.update();
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script><script>
+// Check for service worker updates every time user opens the app
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    // Check for updates every time the page loads
+    reg.update();
+    
+    // Optional: notify user when an update is ready
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          // New version available, refresh to apply
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,12 +25,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>📋 UJENZI - CITIZEN REPORTS</h1>
+        <h1>?? UJENZI - CITIZEN REPORTS</h1>
         <div class="nav">
-            <a href="dashboard.html">🏗️ Stalled Projects</a>
-            <a href="bailout.html">💰 Bailout Watch</a>
-            <a href="report.html">📱 Report</a>
-            <a href="reports_view.html">📋 Reports</a>
+            <a href="dashboard.html">??? Stalled Projects</a>
+            <a href="bailout.html">?? Bailout Watch</a>
+            <a href="report.html">?? Report</a>
+            <a href="reports_view.html">?? Reports</a>
         </div>
         <div id="reportsList" class="reports-list">Loading...</div>
         <div class="footer">Citizen-submitted evidence of stalled government projects</div>
@@ -40,23 +40,23 @@
             var reports = JSON.parse(localStorage.getItem('ujenzi_reports') || '[]');
             var container = document.getElementById('reportsList');
             if (reports.length === 0) {
-                container.innerHTML = '<div class="empty">📭 No citizen reports yet. Be the first to report a stalled project!</div>';
+                container.innerHTML = '<div class="empty">?? No citizen reports yet. Be the first to report a stalled project!</div>';
                 return;
             }
             var html = '';
             for (var i = reports.length - 1; i >= 0; i--) {
                 var r = reports[i];
                 html += '<div class="report-card">';
-                html += '<div class="report-name">🚧 ' + escapeHtml(r.name) + '</div>';
+                html += '<div class="report-name">?? ' + escapeHtml(r.name) + '</div>';
                 html += '<div class="report-details">';
-                html += '<span class="detail">📁 ' + escapeHtml(r.ministry) + '</span>';
-                html += '<span class="detail">⚠️ ' + escapeHtml(r.status) + '</span>';
-                html += '<span class="detail">💰 ' + escapeHtml(r.budget) + '</span>';
-                html += '<span class="detail">📅 ' + new Date(r.date).toLocaleDateString() + '</span>';
+                html += '<span class="detail">?? ' + escapeHtml(r.ministry) + '</span>';
+                html += '<span class="detail">?? ' + escapeHtml(r.status) + '</span>';
+                html += '<span class="detail">?? ' + escapeHtml(r.budget) + '</span>';
+                html += '<span class="detail">?? ' + new Date(r.date).toLocaleDateString() + '</span>';
                 html += '</div>';
-                html += '<div class="report-description">📝 ' + escapeHtml(r.description) + '</div>';
+                html += '<div class="report-description">?? ' + escapeHtml(r.description) + '</div>';
                 if (r.lat && r.lng) {
-                    html += '<a href="https://www.google.com/maps?q=' + r.lat + ',' + r.lng + '&layer=satellite" target="_blank" class="satellite-link">🛰️ Verify via Satellite</a>';
+                    html += '<a href="https://www.google.com/maps?q=' + r.lat + ',' + r.lng + '&layer=satellite" target="_blank" class="satellite-link">??? Verify via Satellite</a>';
                 }
                 if (r.photo) {
                     html += '<div class="report-photo"><img src="' + r.photo + '" alt="Evidence"></div>';
@@ -76,5 +76,43 @@
         }
         loadReports();
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    reg.update();
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script><script>
+// Check for service worker updates every time user opens the app
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    // Check for updates every time the page loads
+    reg.update();
+    
+    // Optional: notify user when an update is ready
+    reg.addEventListener('updatefound', function() {
+      var newWorker = reg.installing;
+      newWorker.addEventListener('statechange', function() {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          // New version available, refresh to apply
+          if (confirm('A new version of Ujenzi is available. Refresh to update?')) {
+            window.location.reload();
+          }
+        }
+      });
+    });
+  });
+}
+</script>
 </body>
 </html>
