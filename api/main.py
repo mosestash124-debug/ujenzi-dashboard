@@ -6,6 +6,9 @@ from typing import Optional
 
 app = FastAPI(title="Ujenzi API", description="Open data for journalists", version="1.0")
 print("✅ Ujenzi API starting up...")
+@app.on_event("startup")
+async def startup_event():
+    print("✅ API ready, endpoints registered: /, /docs, /api/projects, /api/debt")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 def load_json(filename):
